@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Digitalsense Brand Colors */
+    --brand-deep-black: 0 0% 0.4%; /* #010101 */
+    --brand-dark-purple: 281 64% 13%; /* #1a0c23 */
+    --brand-medium-purple: 281 47% 21%; /* #281835 */
+    --brand-accent-purple: 281 65% 32%; /* #57227e */
+    --brand-warm-brown: 37 15% 32%; /* #5f5144 */
+    --brand-light-gold: 45 40% 57%; /* #b8a471 */
+    --brand-primary-gold: 45 70% 47%; /* #cb9a24 */
+    --brand-cream: 45 44% 91%; /* #ece8dd */
+    --brand-light-cream: 45 65% 94%; /* #f0e4ca */
+    --brand-light-gray: 60 4% 89%; /* #e2e4e3 */
+    --brand-white: 0 0% 100%; /* #ffffff */
+    --brand-charcoal: 266 14% 20%; /* #38303E */
+    --brand-lime-green: 63 74% 44%; /* #a0a83b */
+    --brand-olive-green: 66 31% 33%; /* #65693f */
+    --brand-bright-yellow: 67 85% 50%; /* #d8e817 */
+
+    /* Semantic tokens */
+    --background: var(--brand-white);
+    --foreground: var(--brand-deep-black);
+    --background-secondary: var(--brand-light-gray);
+    --foreground-secondary: var(--brand-charcoal);
+
+    --card: var(--brand-white);
+    --card-foreground: var(--brand-deep-black);
+
+    --popover: var(--brand-white);
+    --popover-foreground: var(--brand-deep-black);
+
+    --primary: var(--brand-primary-gold);
+    --primary-foreground: var(--brand-white);
+
+    --secondary: var(--brand-light-gray);
+    --secondary-foreground: var(--brand-charcoal);
+
+    --muted: var(--brand-cream);
+    --muted-foreground: var(--brand-charcoal);
+
+    --accent: var(--brand-olive-green);
+    --accent-foreground: var(--brand-white);
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: var(--brand-white);
+
+    --border: var(--brand-light-gray);
+    --input: var(--brand-light-gray);
+    --ring: var(--brand-primary-gold);
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--brand-primary-gold)), hsl(var(--brand-light-gold)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--brand-white)), hsl(var(--brand-cream)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--brand-olive-green)), hsl(var(--brand-lime-green)));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(var(--brand-primary-gold) / 0.1);
+    --shadow-elegant: 0 8px 30px hsl(var(--brand-charcoal) / 0.08);
+    --shadow-focus: 0 0 0 3px hsl(var(--brand-primary-gold) / 0.2);
+
+    /* Typography */
+    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .dark {
+    /* Keep light theme as default for this project */
+    --background: var(--brand-white);
+    --foreground: var(--brand-deep-black);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-variation-settings: 'opsz' 32;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    font-weight: 700;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  p {
+    line-height: 1.6;
+    color: hsl(var(--foreground-secondary));
+  }
+
+  /* Custom animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.4s ease-out;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Utility classes */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .gradient-text {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
